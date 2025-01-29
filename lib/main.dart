@@ -3,6 +3,7 @@ import 'package:notifications/html_image.dart';
 
 /// Entrypoint of the application.
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
@@ -38,13 +39,13 @@ class _HomePageState extends State<HomePage> {
           children: [
             Expanded(
               child: AspectRatio(
-                aspectRatio: 3,
+                aspectRatio: 1,
                 child: Container(
                     decoration: BoxDecoration(
                       color: Colors.grey,
                       borderRadius: BorderRadius.circular(12),
                     ),
-                    child: HtmlImage()),
+                    child: Center(child: HtmlImg())),
               ),
             ),
             const SizedBox(height: 8),
