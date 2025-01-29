@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:notifications/html_image.dart';
 
 /// Entrypoint of the application.
 void main() {
@@ -23,7 +24,8 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-/// State of a [HomePage].
+
+
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
@@ -36,19 +38,16 @@ class _HomePageState extends State<HomePage> {
           children: [
             Expanded(
               child: AspectRatio(
-                aspectRatio: 1,
+                aspectRatio: 3,
                 child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.grey,
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                ),
+                    decoration: BoxDecoration(
+                      color: Colors.grey,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: HtmlImage()),
               ),
             ),
             const SizedBox(height: 8),
-            HtmlElementView.fromTagName(
-              tagName: 'img',
-            ),
             Row(
               children: [
                 Expanded(
@@ -76,3 +75,5 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
+
+
