@@ -1,5 +1,10 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:notifications/focused.dart';
 import 'package:notifications/html_image.dart';
+import 'dart:html';
+
+import 'menu.dart';
 
 /// Entrypoint of the application.
 void main() {
@@ -25,9 +30,11 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-
-
 class _HomePageState extends State<HomePage> {
+  bool isFullScreen = false;
+  String imageUrl = '';
+  TextEditingController controller = TextEditingController();
+  GlobalKey buttonKey = GlobalKey();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,7 +52,12 @@ class _HomePageState extends State<HomePage> {
                       color: Colors.grey,
                       borderRadius: BorderRadius.circular(12),
                     ),
-                    child: Center(child: HtmlImg())),
+                    child: Center(
+                        child: GestureDetector(
+                            onDoubleTap: pressBotton,
+                            child: HtmlImg(
+                              image: imageUrl,
+                            )))),
               ),
             ),
             const SizedBox(height: 8),
@@ -53,11 +65,12 @@ class _HomePageState extends State<HomePage> {
               children: [
                 Expanded(
                   child: TextField(
+                    controller: controller,
                     decoration: InputDecoration(hintText: 'Image URL'),
                   ),
                 ),
                 ElevatedButton(
-                  onPressed: null,
+                  onPressed: getImage,
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(0, 12, 0, 12),
                     child: Icon(Icons.arrow_forward),
@@ -69,12 +82,47 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: null,
-        child: Icon(Icons.add),
+      floatingActionButton: FocusedMenuHolder(
+        onPressed: () {},
+        menuWidth: 250,
+        menuItems: <FocusedMenuItem>[
+          FocusedMenuItem(title: Text("Enter fullscreen"), trailingIcon: Icon(Icons.fullscreen), onPressed: fullScreen),
+          FocusedMenuItem(
+              title: Text("Exit fullscreen"), trailingIcon: Icon(Icons.fullscreen_exit), onPressed: exitFullscreen),
+        ],
+        child: Container(
+            height: 56,
+            width: 56,
+            decoration: BoxDecoration(
+              boxShadow: [BoxShadow(blurRadius: 6, offset: Offset(0, 6), color: Colors.black26)],
+             color: const Color.fromARGB(255, 249, 230, 230),
+              shape: BoxShape.rectangle,
+              borderRadius: BorderRadius.all(Radius.circular(16)),
+            ),
+            child: Icon(Icons.add)),
       ),
     );
   }
+
+  void pressBotton() async {
+    if (kIsWeb) {
+      isFullScreen ? exitFullscreen() : fullScreen();
+    }
+  }
+
+  exitFullscreen() {
+    isFullScreen = false;
+    document.exitFullscreen();
+  }
+
+  void getImage() {
+    setState(() {
+      imageUrl = controller.text;
+    });
+  }
+
+  void fullScreen() {
+    isFullScreen = true;
+    document.documentElement?.requestFullscreen();
+  }
 }
-
-

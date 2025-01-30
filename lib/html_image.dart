@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 
 class HtmlImg extends StatefulWidget {
-  const HtmlImg({super.key});
+  const HtmlImg({super.key, required this.image});
+  final String image;
 
   @override
   State<HtmlImg> createState() => _HtmlImgState();
@@ -15,11 +16,9 @@ class _HtmlImgState extends State<HtmlImg> {
   @override
   Widget build(BuildContext context) {
     return HtmlWidget(
-      """<!DOCTYPE html>
-<body>
-    <img src="https://docs.flutter.dev/assets/images/flutter-logo-sharing.png" alt="Логотип компании" >
-</body>
-</html>""",
+      """
+    <img src="${widget.image}" alt="Изображение не задано" >
+""",
     );
   }
 }
