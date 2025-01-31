@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+/// Context menu item template.
+
 class FocusedMenuItem {
   Color? backgroundColor;
   Widget title;
