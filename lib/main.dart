@@ -31,7 +31,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  /// if installed FullScreen [isFullScreen] is true
+  /// If installed FullScreen [isFullScreen] is true
   bool isFullScreen = false;
   String imageUrl = '';
   TextEditingController textController = TextEditingController();
