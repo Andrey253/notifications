@@ -3,19 +3,14 @@ import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 
 /// HTML teg img.
 
-class HtmlImg extends StatefulWidget {
+class HtmlImg extends StatelessWidget {
   const HtmlImg({super.key, required this.image});
   final String image;
 
   @override
-  State<HtmlImg> createState() => _HtmlImgState();
-}
-
-class _HtmlImgState extends State<HtmlImg> {
-  @override
   Widget build(BuildContext context) {
     return HtmlWidget(
-      """<img src="${widget.image}" alt="Изображение не задано" >""",
+      """<img src="$image" alt="Set the image url and click the right arrow">""",
     );
   }
 }

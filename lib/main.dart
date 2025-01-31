@@ -1,8 +1,10 @@
+import 'dart:html';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+
 import 'package:notifications/widgets/main_body.dart';
 import 'package:notifications/widgets/menu_button.dart';
-import 'dart:html';
 
 /// Entrypoint of the application.
 void main() {
@@ -29,37 +31,44 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  /// if installed FullScreen [isFullScreen] is true
   bool isFullScreen = false;
   String imageUrl = '';
-  TextEditingController controller = TextEditingController();
+  TextEditingController textController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      body: MainBody(onDoubleTap: onDoubleTapOnImage, imageUrl: imageUrl, setUrlImage: setUrlImage, controller: controller),
-      floatingActionButton: MenuButton(fullScreen: fullScreen, exitFullscreen: exitFullscreen),
+      body: MainBody(
+          onDoubleTap: onDoubleTapOnImage,
+          imageUrl: imageUrl,
+          setUrlImage: setUrlImage,
+          textController: textController),
+      floatingActionButton: MenuButton(
+        setFullScreenFunction: setFullScreen,
+        exitFullscreenFunction: exitFullscreen,
+      ),
     );
   }
 
   void onDoubleTapOnImage() async {
     if (kIsWeb) {
-      isFullScreen ? exitFullscreen() : fullScreen();
+      isFullScreen ? exitFullscreen() : setFullScreen();
     }
   }
 
   void setUrlImage() {
-    setState(() {
-      imageUrl = controller.text;
-    });
+    setState(() => imageUrl = textController.text);
   }
 
-  void fullScreen() {
+  void setFullScreen() {
+    if (!kIsWeb) return;
     isFullScreen = true;
     document.documentElement?.requestFullscreen();
   }
 
   exitFullscreen() {
+    if (!kIsWeb) return;
     isFullScreen = false;
     document.exitFullscreen();
   }

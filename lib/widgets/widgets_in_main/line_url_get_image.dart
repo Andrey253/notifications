@@ -13,12 +13,14 @@ class LineUrlGetImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
               children: [
+                /// Address url image.
                 Expanded(
                   child: TextField(
                     controller: controller,
                     decoration: InputDecoration(hintText: 'Image URL'),
                   ),
                 ),
+                /// Button get image.
                 ElevatedButton(
                   onPressed: getImage,
                   child: Padding(

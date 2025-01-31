@@ -2,25 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:notifications/templates/focused_menu_holder.dart';
 import 'package:notifications/templates/focused_menu_item.dart';
 
-/// Menu button.
+/// Context menu and button.
 
 class MenuButton extends StatelessWidget {
-  final Function fullScreen;
+  final Function setFullScreenFunction;
   
-  final Function exitFullscreen;
+  final Function exitFullscreenFunction;
 
-  const MenuButton({super.key, required this.fullScreen, required this.exitFullscreen});
+  const MenuButton({super.key, required this.setFullScreenFunction, required this.exitFullscreenFunction});
 
   @override
   Widget build(BuildContext context) {
+    /// Context menu.
     return FocusedMenuHolder(
         onPressed: () {},
         menuWidth: 250,
         menuItems: <FocusedMenuItem>[
-          FocusedMenuItem(title: Text("Enter fullscreen"), trailingIcon: Icon(Icons.fullscreen), onPressed: fullScreen),
+          FocusedMenuItem(title: Text("Enter fullscreen"), trailingIcon: Icon(Icons.fullscreen), onPressed: setFullScreenFunction),
           FocusedMenuItem(
-              title: Text("Exit fullscreen"), trailingIcon: Icon(Icons.fullscreen_exit), onPressed: exitFullscreen),
+              title: Text("Exit fullscreen"), trailingIcon: Icon(Icons.fullscreen_exit), onPressed: exitFullscreenFunction),
         ],
+        /// Button context menu.
         child: Container(
             height: 56,
             width: 56,

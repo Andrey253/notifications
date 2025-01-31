@@ -10,14 +10,14 @@ class MainBody extends StatelessWidget {
 
   final VoidCallback setUrlImage;
 
-  final TextEditingController controller;
+  final TextEditingController textController;
 
   const MainBody(
       {super.key,
       required this.onDoubleTap,
       required this.imageUrl,
       required this.setUrlImage,
-      required this.controller});
+      required this.textController});
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class MainBody extends StatelessWidget {
         children: [
           ImageArea(onDoubleTap: onDoubleTap, imageUrl: imageUrl),
           const SizedBox(height: 8),
-          LineUrlGetImage(controller: controller, getImage: setUrlImage),
+          LineUrlGetImage(controller: textController, getImage: setUrlImage),
           const SizedBox(height: 64),
         ],
       ),
